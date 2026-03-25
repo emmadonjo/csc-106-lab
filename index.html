@@ -1,154 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lex AI</title>
-  <style>
-    :root{
-      --bg:#0b1020;
-      --card:#121a33;
-      --card2:#182447;
-      --text:#eef2ff;
-      --muted:#aab3d6;
-      --accent:#7c5cff;
-      --accent2:#23c8a6;
-      --danger:#ff5d73;
-      --bubbleUser:#7c5cff;
-      --bubbleBot:#202c55;
-      --border:rgba(255,255,255,.08);
-      --shadow:0 20px 60px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:radial-gradient(circle at top, #182447 0, var(--bg) 55%);
-      color:var(--text);
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-    }
-    .app{
-      width:min(1100px, 100%);
-      height:min(90vh, 900px);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid var(--border);
-      border-radius:28px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      display:grid;
-      grid-template-columns: 320px 1fr;
-    }
-    .sidebar{
-      background:linear-gradient(180deg, rgba(18,26,51,.98), rgba(10,15,30,.98));
-      border-right:1px solid var(--border);
-      padding:24px;
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
-    .logo{
-      width:54px;
-      height:54px;
-      border-radius:16px;
-      background:linear-gradient(135deg, var(--accent), var(--accent2));
-      display:grid;
-      place-items:center;
-      font-weight:800;
-      font-size:20px;
-      color:white;
-      box-shadow:0 10px 30px rgba(124,92,255,.35);
-      user-select:none;
-    }
-    .brand h1{
-      margin:0;
-      font-size:24px;
-      line-height:1;
-    }
-    .brand p{
-      margin:4px 0 0;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .panel{
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--border);
-      border-radius:20px;
-      padding:16px;
-    }
-    .panel h3{
-      margin:0 0 10px;
-      font-size:15px;
-    }
-    .panel p, .panel li{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.55;
-    }
-    .panel ul{margin:0; padding-left:18px}
-    .status{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:var(--accent2);
-      box-shadow:0 0 0 6px rgba(35,200,166,.12);
+div.textContent = item.user.slice(0, 42) + (item.user.length > 42 ? '...' : '');
+        div.onclick = () => {
+          chat.innerHTML = '';
+          item.pair.forEach(m => addMessage(m.text, m.type));
+        };
+        historyEl.appendChild(div);
+      });
     }
 
-    .main{
-      display:flex;
-      flex-direction:column;
-      background:
-        radial-gradient(circle at top right, rgba(124,92,255,.12), transparent 30%),
-        radial-gradient(circle at bottom left, rgba(35,200,166,.08), transparent 25%),
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    function botReply(prompt) {
+      const p = prompt.toLowerCase();
+      if (p.includes('hello') || p.includes('hi')) return 'Hello. I am Lex AI. How can I help today?';
+      if (p.includes('advice') || p.includes('help')) return 'Here is a simple approach: break the problem into small steps, then act on the easiest one first.';
+      if (p.includes('code')) return 'I can help write code, explain it, and improve it. Tell me what you want to build.';
+      if (p.includes('who are you')) return 'I am Lex AI, a chat and voice assistant designed to answer questions and give advice.';
+      return 'I understand. Tell me a little more so I can give a useful answer.';
     }
-    .topbar{
-      padding:18px 22px;
-      border-bottom:1px solid var(--border);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      background:rgba(10,15,30,.35);
-      backdrop-filter: blur(10px);
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utterance);
     }
-    .topbar .title{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      const pair = [];
+      addMessage(text, 'user');
+      pair.push({ text, type: 'user' });
+
+      const reply = botReply(text);
+      setTimeout(() => {
+        addMessage(reply, 'bot');
+        pair.push({ text: reply, type: 'bot' });
+        conversation.push({ user: text, pair });
+        saveHistory();
+        renderHistory();
+        statusEl.textContent = 'Reply ready';
+      }, 300);
+
+      input.value = '';
+      statusEl.textContent = 'Thinking...';
     }
-    .topbar strong{font-size:16px}
-    .topbar span{font-size:13px; color:var(--muted)}
-    .pill{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      color:var(--muted);
-      font-size:13px;
+
+    sendBtn.onclick = sendMessage;
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    speakBtn.onclick = () => {
+      const lastBot = [...chat.querySelectorAll('.msg.bot')].pop();
+      if (lastBot) speak(lastBot.textContent);
+    };
+
+    voiceBtn.onclick = () => {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        statusEl.textContent = 'Voice not supported';
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => statusEl.textContent = 'Listening...';
+      recognition.onerror = () => statusEl.textContent = 'Voice error';
+      recognition.onresult = (event) => {
+        input.value = event.results[0][0].transcript;
+        statusEl.textContent = 'Voice captured';
+      };
+      recognition.onend = () => statusEl.textContent = 'Ready';
+      recognition.start();
+    };
+
+    if (conversation.length === 0) {
+      const welcome = 'Welcome to Lex AI. Ask me anything, and I will reply in chat or voice.';
+      addMessage(welcome, 'bot');
+      conversation.push({ user: 'welcome', pair: [{ text: welcome, type: 'bot' }] });
+      saveHistory();
+    } else {
+      const last = conversation[conversation.length - 1];
+      last.pair.forEach(m => addMessage(m.text, m.type));
     }
-    .chat{
-      flex:1;
-      padding:22px;
-      overflow:auto;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .msg{
-      max-width:min(760px, 82%);
+
+    renderHistory();
+  </script>
+</body>
+</html>
