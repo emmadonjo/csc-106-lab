@@ -7,101 +7,296 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+    
+    :root {
+      --bg: #1f1f1f;
+      --accent: #a855f7;
+    }
     
     body {
+      background-color: var(--bg);
       font-family: 'Inter', sans-serif;
-      transition: background 0.4s;
+      color: #e5e5e5;
+      transition: background-color 0.4s ease;
     }
-    .logo-font { font-family: 'Space Grotesk', sans-serif; }
     
-    .chat-container { max-width: 920px; margin: 0 auto; height: 100vh; display: flex; flex-direction: column; }
+    .logo-font {
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.05em;
+    }
+
+    .chat-container {
+      max-width: 920px;
+      margin: 0 auto;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #1a1a1a;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    }
+
     .message {
-      max-width: 82%;
+      max-width: 78%;
       padding: 16px 22px;
-      border-radius: 22px;
-      margin-bottom: 18px;
-      line-height: 1.55;
-      animation: fadeIn 0.3s ease;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      line-height: 1.6;
+      animation: messageFade 0.3s ease forwards;
     }
-    .user { background: #7c3aed; color: white; align-self: flex-end; border-bottom-right-radius: 6px; }
-    .lexi { background: #2a1b4a; border: 1px solid #a78bfa; align-self: flex-start; border-bottom-left-radius: 6px; }
     
-    .input-area { background: #1a0f2e; border-top: 1px solid #6b46c1; }
-    .custom-scroll::-webkit-scrollbar { width: 6px; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #6b46c1; border-radius: 20px; }
+    .user {
+      background: linear-gradient(135deg, #7e22ce, #c026d3);
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
     
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .lexi {
+      background: #2a2a2a;
+      border: 1px solid #a855f7;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    @keyframes messageFade {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .input-area {
+      background: #1a1a1a;
+      border-top: 1px solid #4b5563;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #6b21a8;
+      border-radius: 20px;
+    }
+
+    .logo-circle {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+    }
   </style>
 </head>
-<body class="bg-gradient-to-br from-[#0f0a1f] to-[#1a0f2e] text-white min-h-screen">
+<body>
 
-<div class="chat-container p-4">
+<div class="chat-container mx-auto overflow-hidden flex flex-col">
   <!-- Header -->
-  <div class="flex items-center justify-between py-5 border-b border-purple-800">
+  <div class="flex items-center justify-between px-6 py-5 border-b border-gray-700 bg-[#171717]">
     <div class="flex items-center gap-4">
-      <div class="w-12 h-12 bg-gradient-to-br from-violet-500 via-fuchsia-500 to-pink-500 rounded-3xl flex items-center justify-center text-3xl shadow-xl">✨</div>
+      <div class="logo-circle">L</div>
       <div>
-        <h1 class="logo-font text-4xl font-semibold tracking-tight">Lexi AI</h1>
+        <h1 class="logo-font text-3xl font-semibold tracking-tighter text-white">Lexi AI</h1>
         <p class="text-purple-400 text-sm flex items-center gap-2">
-          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-          Online • Web3 + Degen Mode
+          <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+          Always Online • Web3 &amp; Degen Mode
         </p>
       </div>
     </div>
     
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-3">
       <button onclick="toggleTheme()" id="themeBtn"
-        class="px-5 py-2.5 bg-white/10 hover:bg-white/20 rounded-2xl transition-all flex items-center gap-2 text-sm">
-        <i class="fas fa-moon"></i> <span>Dark</span>
+        class="flex items-center gap-2 px-5 py-2.5 bg-gray-800 hover:bg-gray-700 rounded-2xl text-sm transition-all">
+        <i class="fas fa-moon"></i>
+        <span>Dark</span>
       </button>
       <button onclick="clearChat()" 
-        class="px-5 py-2.5 bg-white/10 hover:bg-white/20 rounded-2xl transition-all text-sm flex items-center gap-2">
-        <i class="fas fa-trash"></i> Clear
+        class="flex items-center gap-2 px-5 py-2.5 bg-gray-800 hover:bg-gray-700 rounded-2xl text-sm transition-all">
+        <i class="fas fa-trash-alt"></i>
+        <span>Clear</span>
       </button>
     </div>
   </div>
 
-  <!-- Chat Area -->
-  <div id="chat" class="flex-1 overflow-y-auto py-8 space-y-6 px-4 custom-scroll"></div>
+  <!-- Chat Messages -->
+  <div id="chat" class="flex-1 overflow-y-auto p-6 space-y-6 custom-scroll bg-[#1f1f1f]"></div>
 
-  <!-- Input -->
-  <div class="input-area p-5">
+  <!-- Input Area -->
+  <div class="input-area p-6">
     <div class="flex gap-3">
+      <!-- Voice Button -->
       <button onclick="startVoiceInput()" id="voiceBtn"
-        class="w-14 h-14 bg-purple-600 hover:bg-purple-700 rounded-3xl flex items-center justify-center text-2xl transition-all active:scale-95">
+        class="w-14 h-14 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-3xl text-2xl transition-all active:scale-95">
         <i class="fas fa-microphone"></i>
       </button>
       
-      <input id="userInput" type="text"
-        class="flex-1 bg-[#2a1b4a] border border-purple-700 focus:border-purple-500 rounded-3xl px-7 py-5 text-lg outline-none placeholder-gray-400"
-        placeholder="Ask me anything... (memecoins, fashion, degen tips...)"
+      <!-- Text Input -->
+      <input 
+        id="userInput"
+        type="text"
+        class="flex-1 bg-[#2a2a2a] border border-gray-600 focus:border-purple-500 rounded-3xl px-7 py-5 text-lg outline-none placeholder-gray-400 transition-all"
+        placeholder="Ask Lexi anything... (memecoins, fashion, degen tips...)"
         onkeypress="if(event.key === 'Enter') sendMessage()">
       
+      <!-- Send Button -->
       <button onclick="sendMessage()" 
-        class="w-14 h-14 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 rounded-3xl flex items-center justify-center text-2xl transition-all active:scale-95">
+        class="w-14 h-14 flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-3xl text-2xl transition-all active:scale-95 shadow-lg">
         <i class="fas fa-paper-plane"></i>
       </button>
     </div>
-    <p class="text-center text-purple-400 text-xs mt-4">Lexi AI can help with Web3, memecoins, NFTs, fashion, and degen life</p>
+    <p class="text-center text-gray-500 text-xs mt-4">Lexi AI — Smart, Sassy &amp; Ready for Web3</p>
   </div>
 </div>
 
 <script>
-// ============== THEME ==============
+// ============== CONFIG & STATE ==============
 let isDark = true;
+let recognition = null;
+
+// ============== THEME ==============
 function toggleTheme() {
   isDark = !isDark;
+  const root = document.documentElement;
   if (isDark) {
-    document.documentElement.style.setProperty('background', 'linear-gradient(to bottom right, #0f0a1f, #1a0f2e)');
-    document.getElementById('themeBtn').innerHTML = `<i class="fas fa-moon"></i> <span>Dark</span>`;
+    root.style.setProperty('--bg', '#1f1f1f');
+    document.getElementById('themeBtn').innerHTML = `<i class="fas fa-moon"></i><span>Dark</span>`;
   } else {
-    document.documentElement.style.setProperty('background', 'linear-gradient(to bottom right, #f3e8ff, #e0d4ff)');
-    document.getElementById('themeBtn').innerHTML = `<i class="fas fa-sun"></i> <span>Light</span>`;
+    root.style.setProperty('--bg', '#e5e7eb');
+    document.getElementById('themeBtn').innerHTML = `<i class="fas fa-sun"></i><span>Light</span>`;
   }
+  document.body.style.backgroundColor = isDark ? '#1f1f1f' : '#e5e7eb';
 }
 
 // ============== CHAT HISTORY ==============
 function loadChat() {
   const chat = document.getElementById('chat');
-  const saved = localStorage.getItem('lex
+  const saved = localStorage.getItem('lexiChatHistory');
+  if (saved) {
+    chat.innerHTML = saved;
+  } else {
+    addMessage('lexi', `Hey there! I'm <strong>Lexi AI</strong> 💜<br>Your personal Web3 degen companion.<br>I can help with memecoins, fashion, trading, NFTs, and everything in between.<br><br>What’s on your mind?`);
+  }
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function saveChat() {
+  localStorage.setItem('lexiChatHistory', document.getElementById('chat').innerHTML);
+}
+
+function clearChat() {
+  if (confirm("Clear all chat history?")) {
+    localStorage.removeItem('lexiChatHistory');
+    document.getElementById('chat').innerHTML = '';
+    addMessage('lexi', `Chat cleared. Fresh start! ✨<br>Ask me anything about crypto, fashion, or life.`);
+  }
+}
+
+// ============== ADD MESSAGE ==============
+function addMessage(sender, content) {
+  const chat = document.getElementById('chat');
+  const div = document.createElement('div');
+  div.className = `message ${sender === 'user' ? 'user' : 'lexi'}`;
+  div.innerHTML = content;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  saveChat();
+}
+
+// ============== INTELLIGENT RESPONSES ==============
+function getLexiResponse(msg) {
+  const lower = msg.toLowerCase().trim();
+
+  if (lower === "") return "I'm listening... Ask me something fun!";
+
+  if (["hi", "hello", "hey", "sup"].some(g => lower.includes(g))) 
+    return "Hey babe 💜 What's the latest alpha today?";
+
+  if (lower.includes("ape") || lower.includes("how to buy")) 
+    return "Smart aping rules:<br>• Risk only what you can lose<br>• Check rugcheck.xyz & dextools<br>• Start small, scale in<br>• Have exit targets ready<br><br>Drop a contract and I'll review it for you.";
+
+  if (lower.includes("solana") || lower.includes("pump.fun") || lower.includes("memecoin")) 
+    return "Solana is still the fastest degen playground.<br>Look for burned LP, renounced contracts, and real community hype.<br><br>Got a coin you want rated? Paste the CA.";
+
+  if (lower.includes("rug") || lower.includes("scam")) 
+    return "Red flags = run:<br>• Dev wallet still holds big bag<br>• Liquidity not burned<br>• Anonymous team with no activity<br><br>Use rugcheck and tokensniffer before aping.";
+
+  if (lower.includes("fashion") || lower.includes("outfit")) 
+    return "Fashion + Web3 is peak culture. Whether it's luxury streetwear or NFT runway drops — I got the vibe. What's the occasion?";
+
+  return `On <strong>${msg}</strong>...<br><br>As your Web3 + fashion AI, always DYOR and manage risk. Want deeper alpha on this? Just tell me!`;
+}
+
+// ============== SEND MESSAGE (FIXED) ==============
+function sendMessage() {
+  const input = document.getElementById("userInput");
+  const text = input.value.trim();
+  
+  if (!text) return;
+
+  // Add user message
+  addMessage("user", text);
+  input.value = "";
+
+  // Show thinking
+  const chat = document.getElementById('chat');
+  const thinkingDiv = document.createElement('div');
+  thinkingDiv.className = "message lexi";
+  thinkingDiv.innerHTML = `<i class="text-purple-400">Lexi is thinking...</i>`;
+  chat.appendChild(thinkingDiv);
+  chat.scrollTop = chat.scrollHeight;
+
+  // Generate response
+  setTimeout(() => {
+    chat.removeChild(thinkingDiv);
+    addMessage("lexi", getLexiResponse(text));
+  }, 700);
+}
+
+// ============== VOICE INPUT ==============
+function startVoiceInput() {
+  const btn = document.getElementById('voiceBtn');
+  
+  if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+    alert("Voice input is not supported in your browser. Please use Chrome or Edge.");
+    return;
+  }
+
+  if (!recognition) {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.continuous = false;
+    recognition.lang = "en-US";
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      document.getElementById("userInput").value = transcript;
+      sendMessage();
+    };
+
+    recognition.onerror = () => {
+      btn.innerHTML = `<i class="fas fa-microphone"></i>`;
+    };
+
+    recognition.onend = () => {
+      btn.innerHTML = `<i class="fas fa-microphone"></i>`;
+    };
+  }
+
+  btn.innerHTML = `<i class="fas fa-microphone text-red-400 animate-pulse"></i>`;
+  recognition.start();
+}
+
+// ============== INITIALIZE ==============
+window.onload = () => {
+  loadChat();
+
+  // Focus input on load
+  document.getElementById("userInput").focus();
+};
+</script>
+
+</body>
+</html>
