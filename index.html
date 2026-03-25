@@ -1,298 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shadow • Your AI LifeGuard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lex AI</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
-    
-    body {
-      background-color: #2a2a2a;
-      color: #d1d5db;
-      font-family: 'Inter', sans-serif;
+    :root{
+      --bg:#0b1020;
+      --card:#121a33;
+      --card2:#182447;
+      --text:#eef2ff;
+      --muted:#aab3d6;
+      --accent:#7c5cff;
+      --accent2:#23c8a6;
+      --danger:#ff5d73;
+      --bubbleUser:#7c5cff;
+      --bubbleBot:#202c55;
+      --border:rgba(255,255,255,.08);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
     }
-    
-    .logo-font {
-      font-family: 'Space Grotesk', sans-serif;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:radial-gradient(circle at top, #182447 0, var(--bg) 55%);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
     }
-    
-    .chat-container {
-      max-width: 960px;
-      margin: 0 auto;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: #1f1f1f;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.7);
+    .app{
+      width:min(1100px, 100%);
+      height:min(90vh, 900px);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns: 320px 1fr;
     }
-    
-    .header {
-      background: #171717;
-      border-bottom: 1px solid #4b5563;
+    .sidebar{
+      background:linear-gradient(180deg, rgba(18,26,51,.98), rgba(10,15,30,.98));
+      border-right:1px solid var(--border);
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
     }
-    
-    .message {
-      max-width: 78%;
-      padding: 16px 22px;
-      border-radius: 20px;
-      margin-bottom: 18px;
-      line-height: 1.65;
-      animation: fadeIn 0.4s ease;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
     }
-    
-    .user {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: white;
-      align-self: flex-end;
-      border-bottom-right-radius: 6px;
+    .logo{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      font-size:20px;
+      color:white;
+      box-shadow:0 10px 30px rgba(124,92,255,.35);
+      user-select:none;
     }
-    
-    .shadow {
-      background: #2f2f2f;
-      border: 1px solid #6b7280;
-      align-self: flex-start;
-      border-bottom-left-radius: 6px;
+    .brand h1{
+      margin:0;
+      font-size:24px;
+      line-height:1;
     }
-    
-    .avatar {
-      width: 58px;
-      height: 58px;
-      background: url('https://picsum.photos/id/64/200/200') center/cover; /* Replace with your uploaded image URL if hosted */
-      border: 4px solid #9ca3af;
-      border-radius: 9999px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      flex-shrink: 0;
+    .brand p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
     }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .panel{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:16px;
     }
-    
-    .input-area {
-      background: #1f1f1f;
-      border-top: 1px solid #4b5563;
+    .panel h3{
+      margin:0 0 10px;
+      font-size:15px;
     }
-    
-    .custom-scroll::-webkit-scrollbar {
-      width: 7px;
+    .panel p, .panel li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
     }
-    .custom-scroll::-webkit-scrollbar-thumb {
-      background: #6b7280;
-      border-radius: 20px;
+    .panel ul{margin:0; padding-left:18px}
+    .status{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:13px;
     }
-  </style>
-</head>
-<body class="min-h-screen">
-
-<div class="chat-container mx-auto flex flex-col">
-  <!-- Header -->
-  <div class="header px-6 py-5 flex items-center justify-between">
-    <div class="flex items-center gap-4">
-      <div class="avatar"></div>
-      <div>
-        <h1 class="logo-font text-3xl font-semibold tracking-tight text-white">Shadow</h1>
-        <p class="text-emerald-400 text-sm flex items-center gap-2">
-          <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></span>
-          Your AI LifeGuard • Always Watching
-        </p>
-      </div>
-    </div>
-    
-    <div class="flex items-center gap-4">
-      <button onclick="toggleTheme()" id="themeBtn"
-        class="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-3xl flex items-center gap-3 text-sm transition-all">
-        <i class="fas fa-moon"></i> <span>Dark</span>
-      </button>
-      <button onclick="clearChat()" 
-        class="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-3xl flex items-center gap-3 text-sm transition-all">
-        <i class="fas fa-trash"></i> <span>Clear</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Chat Area -->
-  <div id="chat" class="flex-1 overflow-y-auto p-8 space-y-7 custom-scroll bg-[#252525]"></div>
-
-  <!-- Input -->
-  <div class="input-area p-6">
-    <div class="flex gap-4">
-      <button onclick="startVoiceInput()" id="voiceBtn"
-        class="w-16 h-16 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-3xl text-3xl transition-all active:scale-95">
-        <i class="fas fa-microphone"></i>
-      </button>
-      
-      <input id="userInput" type="text"
-        class="flex-1 bg-[#2f2f2f] border border-gray-600 focus:border-indigo-500 rounded-3xl px-8 py-6 text-lg outline-none placeholder-gray-400"
-        placeholder="Ask me anything... I'm your LifeGuard"
-        onkeypress="if(event.key === 'Enter') sendMessage()">
-      
-      <button onclick="sendMessage()" 
-        class="w-16 h-16 flex items-center justify-center bg-gradient-to-br from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 rounded-3xl text-3xl transition-all active:scale-95 shadow-xl">
-        <i class="fas fa-paper-plane"></i>
-      </button>
-    </div>
-    <p class="text-center text-gray-500 text-xs mt-4">Shadow searches the web in real-time • Gives deep explanations • Guards your decisions</p>
-  </div>
-</div>
-
-<script>
-// ============== STATE ==============
-let isDark = true;
-let recognition = null;
-
-// ============== THEME ==============
-function toggleTheme() {
-  isDark = !isDark;
-  document.getElementById('themeBtn').innerHTML = isDark 
-    ? `<i class="fas fa-moon"></i><span>Dark</span>` 
-    : `<i class="fas fa-sun"></i><span>Light</span>`;
-  document.body.style.backgroundColor = isDark ? '#2a2a2a' : '#e5e7eb';
-}
-
-// ============== CHAT HISTORY ==============
-function loadChat() {
-  const chat = document.getElementById('chat');
-  const saved = localStorage.getItem('shadowChat');
-  if (saved) {
-    chat.innerHTML = saved;
-  } else {
-    addMessage('shadow', `I'm <strong>Shadow</strong>, your personal AI LifeGuard.<br>I search the web in real-time, explain things deeply, keep conversations natural, and look out for you like a true guardian.<br><br>What do you need help with today?`);
-  }
-  chat.scrollTop = chat.scrollHeight;
-}
-
-function saveChat() {
-  localStorage.setItem('shadowChat', document.getElementById('chat').innerHTML);
-}
-
-function clearChat() {
-  if (confirm("Clear conversation history?")) {
-    localStorage.removeItem('shadowChat');
-    document.getElementById('chat').innerHTML = '';
-    addMessage('shadow', `Memory cleared. I'm still here watching over you. What’s next?`);
-  }
-}
-
-// ============== ADD MESSAGE ==============
-function addMessage(sender, html) {
-  const chat = document.getElementById('chat');
-  const div = document.createElement('div');
-  div.className = `message flex gap-4 ${sender === 'user' ? 'user justify-end' : 'shadow'}`;
-  
-  if (sender === 'shadow') {
-    div.innerHTML = `
-      <div class="avatar w-10 h-10 flex-shrink-0"></div>
-      <div class="flex-1">${html}</div>
-    `;
-  } else {
-    div.innerHTML = `<div class="flex-1 text-right">${html}</div>`;
-  }
-  
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
-  saveChat();
-}
-
-// ============== DEEP WEB-AWARE RESPONSES (SIMULATED + REAL KNOWLEDGE) ==============
-async function getShadowResponse(query) {
-  // Simulate "web search" with rich, deep knowledge (in real deployment connect to Tavily / Jina / SerpAPI)
-  const lower = query.toLowerCase();
-  
-  let response = `<strong>Shadow searched the web and thought deeply...</strong><br><br>`;
-  
-  if (lower.includes("weather") || lower.includes("today")) {
-    response += `Current global trends show variable weather. For precise local forecast, tell me your city. As your LifeGuard, I recommend checking reliable sources like NOAA or BBC Weather before any outdoor plans.`;
-  } 
-  else if (lower.includes("crypto") || lower.includes("bitcoin") || lower.includes("solana")) {
-    response += `As of my last real-time check (2026), Bitcoin remains the king with strong institutional adoption, while Solana continues dominating high-speed memecoin activity. Always verify live prices on CoinGecko or CoinMarketCap. Risk warning: Never invest more than you can afford to lose. Want me to deep-dive a specific token?`;
-  } 
-  else if (lower.includes("health") || lower.includes("sick")) {
-    response += `I'm not a doctor, but general advice from trusted sources (Mayo Clinic, WHO): Stay hydrated, rest, and consult a professional for symptoms. As your LifeGuard, I care about your well-being — describe how you feel and I’ll help find reliable info.`;
-  } 
-  else if (lower.includes("fashion") || lower.includes("outfit")) {
-    response += `Fashion in 2026 leans into sustainable luxury and tech-integrated wearables. Grey tones (like our theme) are timeless. Need outfit ideas for an event? Tell me the occasion and your style.`;
-  } 
-  else {
-    response += `I pulled the latest information across reliable sources. ${query} is a broad topic — here's a deep breakdown:<br><br>• Core facts from recent publications<br>• Practical implications for your life<br>• Balanced pros/cons<br>• My guardian recommendation: Proceed with caution and verify with multiple sources.<br><br>Want me to expand on any part or search something more specific?`;
-  }
-  
-  // Add conversational warmth
-  response += `<br><br>I'm here for you — not just answering, but protecting your decisions. What's your next thought?`;
-  
-  return response;
-}
-
-// ============== SEND MESSAGE ==============
-async function sendMessage() {
-  const input = document.getElementById("userInput");
-  const text = input.value.trim();
-  if (!text) return;
-
-  addMessage("user", text);
-  input.value = "";
-
-  // Thinking indicator
-  const chat = document.getElementById('chat');
-  const thinking = document.createElement('div');
-  thinking.className = "message shadow flex gap-4";
-  thinking.innerHTML = `
-    <div class="avatar w-10 h-10 flex-shrink-0"></div>
-    <div class="flex-1"><i class="text-gray-400">Shadow is searching the web and thinking deeply...</i></div>
-  `;
-  chat.appendChild(thinking);
-  chat.scrollTop = chat.scrollHeight;
-
-  // Get deep response
-  setTimeout(async () => {
-    chat.removeChild(thinking);
-    const reply = await getShadowResponse(text);
-    addMessage("shadow", reply);
-  }, 1200);
-}
-
-// ============== VOICE INPUT ==============
-function startVoiceInput() {
-  const btn = document.getElementById('voiceBtn');
-  
-  if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
-    alert("Voice input not supported in this browser. Try Chrome.");
-    return;
-  }
-
-  if (!recognition) {
-    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = "en-US";
-
-    recognition.onresult = (event) => {
-      document.getElementById("userInput").value = event.results[0][0].transcript;
-      sendMessage();
-    };
-
-    recognition.onend = () => btn.innerHTML = `<i class="fas fa-microphone"></i>`;
-  }
-
-  btn.innerHTML = `<i class="fas fa-microphone text-red-400 animate-pulse"></i>`;
-  recognition.start();
-}
-
-// ============== INITIALIZE ==============
-window.onload = () => {
-  loadChat();
-  document.getElementById("userInput").focus();
-  
-  // Bonus: Press '/' to focus input
-  document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.getElementById("userInput") !== document.activeElement) {
-      e.preventDefault();
-      document.getElementById("userInput").focus();
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--accent2);
+      box-shadow:0 0 0 6px rgba(35,200,166,.12);
     }
-  });
-};
-</script>
 
-</body>
-</html>
+    .main{
+      display:flex;
+      flex-direction:column;
+      background:
+        radial-gradient(circle at top right, rgba(124,92,255,.12), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(35,200,166,.08), transparent 25%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+    .topbar{
+      padding:18px 22px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      background:rgba(10,15,30,.35);
+      backdrop-filter: blur(10px);
+    }
+    .topbar .title{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .topbar strong{font-size:16px}
+    .topbar span{font-size:13px; color:var(--muted)}
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .chat{
+      flex:1;
+      padding:22px;
+      overflow:auto;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .msg{
+      max-width:min(760px, 82%);
