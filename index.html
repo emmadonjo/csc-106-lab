@@ -1,98 +1,92 @@
-div.textContent = item.user.slice(0, 42) + (item.user.length > 42 ? '...' : '');
-        div.onclick = () => {
-          chat.innerHTML = '';
-          item.pair.forEach(m => addMessage(m.text, m.type));
-        };
-        historyEl.appendChild(div);
-      });
-    }
-
-    function botReply(prompt) {
-      const p = prompt.toLowerCase();
-      if (p.includes('hello') || p.includes('hi')) return 'Hello. I am Lex AI. How can I help today?';
-      if (p.includes('advice') || p.includes('help')) return 'Here is a simple approach: break the problem into small steps, then act on the easiest one first.';
-      if (p.includes('code')) return 'I can help write code, explain it, and improve it. Tell me what you want to build.';
-      if (p.includes('who are you')) return 'I am Lex AI, a chat and voice assistant designed to answer questions and give advice.';
-      return 'I understand. Tell me a little more so I can give a useful answer.';
-    }
-
-    function speak(text) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = 1;
-      utterance.pitch = 1;
-      speechSynthesis.cancel();
-      speechSynthesis.speak(utterance);
-    }
-
-    function sendMessage() {
-      const text = input.value.trim();
-      if (!text) return;
-
-      const pair = [];
-      addMessage(text, 'user');
-      pair.push({ text, type: 'user' });
-
-      const reply = botReply(text);
-      setTimeout(() => {
-        addMessage(reply, 'bot');
-        pair.push({ text: reply, type: 'bot' });
-        conversation.push({ user: text, pair });
-        saveHistory();
-        renderHistory();
-        statusEl.textContent = 'Reply ready';
-      }, 300);
-
-      input.value = '';
-      statusEl.textContent = 'Thinking...';
-    }
-
-    sendBtn.onclick = sendMessage;
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
-
-    speakBtn.onclick = () => {
-      const lastBot = [...chat.querySelectorAll('.msg.bot')].pop();
-      if (lastBot) speak(lastBot.textContent);
-    };
-
-    voiceBtn.onclick = () => {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        statusEl.textContent = 'Voice not supported';
-        return;
-      }
-
-      const recognition = new SpeechRecognition();
-      recognition.lang = 'en-US';
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-
-      recognition.onstart = () => statusEl.textContent = 'Listening...';
-      recognition.onerror = () => statusEl.textContent = 'Voice error';
-      recognition.onresult = (event) => {
-        input.value = event.results[0][0].transcript;
-        statusEl.textContent = 'Voice captured';
-      };
-      recognition.onend = () => statusEl.textContent = 'Ready';
-      recognition.start();
-    };
-
-    if (conversation.length === 0) {
-      const welcome = 'Welcome to Lex AI. Ask me anything, and I will reply in chat or voice.';
-      addMessage(welcome, 'bot');
-      conversation.push({ user: 'welcome', pair: [{ text: welcome, type: 'bot' }] });
-      saveHistory();
-    } else {
-      const last = conversation[conversation.length - 1];
-      last.pair.forEach(m => addMessage(m.text, m.type));
-    }
-
-    renderHistory();
-  </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lex AI Chatbot</title>
+    <link rel="icon" href="path_to_lex_logo.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .messages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .user-input {
+            display: flex;
+        }
+        .user-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .user-input button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <img class="logo" src="path_to_lex_logo.png" alt="Lex Logo">
+            <h2>Lex AI Chatbot</h2>
+        </div>
+        <div class="messages" id="messages"></div>
+        <div class="user-input">
+            <input type="text" id="userMessage" placeholder="Type your message...">
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const userMessageInput = document.getElementById('userMessage');
+        const sendButton = document.getElementById('sendButton');
+        
+        sendButton.onclick = () => {
+            const userMessage = userMessageInput.value;
+            if (userMessage) {
+                messagesDiv.innerHTML += <div>User: ${userMessage}</div>;
+                userMessageInput.value = '';
+                // Here, you would typically send the message to the chatbot API and get a response
+                // For now, we'll simulate a response:
+                setTimeout(() => {
+                    messagesDiv.innerHTML += <div>Lex AI: This is a simulated response!</div>;
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the bottom
+                }, 1000);
+            }
+        }
+    </script>
 </body>
 </html>
