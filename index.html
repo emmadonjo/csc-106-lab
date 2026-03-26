@@ -4,6 +4,74 @@
     <meta charset="UTF-8">
     <title>AURA MODE | Home</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Quick inline enhancements for the collection grid – add to style.css if preferred */
+        .coll-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .coll-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4 / 5; /* Elegant portrait feel for most images */
+        }
+
+        .coll-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .coll-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .coll-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.75));
+            color: white;
+            padding: 30px 20px 20px;
+            font-family: 'Playfair Display', serif; /* assuming you have luxury fonts */
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        /* Make hero more striking */
+        .hero {
+            height: 90vh;
+            background: url('hat.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 2;
+            font-size: 6rem;
+            letter-spacing: 8px;
+            line-height: 1;
+        }
+    </style>
 </head>
 <body>
     <!-- Consistent Link Structure -->
@@ -18,24 +86,47 @@
         </div>
     </nav>
 
-    <!-- Luxury Hero Section -->
+    <!-- Luxury Hero Section – now features the Wanderlust Fedora -->
     <header class="hero">
         <h1>AURA<br>MODE</h1>
     </header>
 
-    <!-- Editorial Collection Grid -->
+    <!-- Editorial Collection Grid – updated with your 5 images -->
     <section class="coll-grid">
-        <div class="coll-item"><img src="collection-1.jpg" alt="Editorial 1"></div>
-        <div class="coll-item"><img src="collection-2.jpg" alt="Editorial 2"></div>
-        <div class="coll-item"><img src="collection-3.jpg" alt="Editorial 3"></div>
-        <div class="coll-item"><img src="collection-4.jpg" alt="Editorial 4"></div>
-        <div class="coll-item"><img src="collection-5.jpg" alt="Editorial 5"></div>
-        <div class="coll-item"><img src="collection-6.jpg" alt="Editorial 6"></div>
+        <!-- 1. Burgundy Fedora -->
+        <div class="coll-item">
+            <img src="hat.jpg" alt="Wanderlust Fedora Burgundy Edition">
+            <div class="coll-overlay">Wanderlust Fedora<br><span style="font-size:1rem;opacity:0.9;">Burgundy Edition</span></div>
+        </div>
+
+        <!-- 2. Mustard Wide-Leg Outfit -->
+        <div class="coll-item">
+            <img src="outfit.jpg" alt="Black Sleeveless Turtleneck with Mustard Wide-Leg Trousers">
+            <div class="coll-overlay">Signature Tailoring<br><span style="font-size:1rem;opacity:0.9;">Sleeveless + Wide Leg</span></div>
+        </div>
+
+        <!-- 3. Black Technical Hoodie -->
+        <div class="coll-item">
+            <img src="hoodie.jpg" alt="Black Urban Armor Hoodie with Utility Pockets">
+            <div class="coll-overlay">Urban Armor Hoodie<br><span style="font-size:1rem;opacity:0.9;">Technical Black</span></div>
+        </div>
+
+        <!-- 4. White Off-Shoulder Linen Dress -->
+        <div class="coll-item">
+            <img src="dress.jpg" alt="White Off-Shoulder Ruffled Linen Midi Dress">
+            <div class="coll-overlay">Coastal Linen Dress<br><span style="font-size:1rem;opacity:0.9;">Breathable White</span></div>
+        </div>
+
+        <!-- 5. Geometric Print Tote Bags -->
+        <div class="coll-item">
+            <img src="bags.jpg" alt="Op Art Geometric Tote Bags in Black and White">
+            <div class="coll-overlay">Op Art Totes<br><span style="font-size:1rem;opacity:0.9;">Bold Geometric Prints</span></div>
+        </div>
     </section>
 
     <!-- Required Marquee (Appears on all pages) -->
     <div class="marquee-wrap">
-        <div class="marquee-content">GLOBAL FASHION HOUSE — NEW PIECES ADDED WEEKLY — PARIS SHOWROOM NOW OPEN — </div>
+        <div class="marquee-content">GLOBAL FASHION HOUSE — NEW PIECES ADDED WEEKLY — PARIS SHOWROOM NOW OPEN — GLOBAL FASHION HOUSE — NEW PIECES ADDED WEEKLY — PARIS SHOWROOM NOW OPEN — </div>
     </div>
 
     <script src="script.js"></script>
