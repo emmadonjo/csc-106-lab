@@ -317,3 +317,20 @@ section.products {
     color: var(--secondary);
 }
 
+.appointment {
+    background:var(--secondary);
+    padding:4rem 0;
+    text-align:center;
+}
+
+.appointment h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem,4vw,2.4rem);
+    color: var(--primary);
+    margin-bottom: .75rem;
+}
+.appointment p {
+    color:rgba(10,10,22,.75);
+    margin-bottom:2rem;
+    font-size:1.05rem;
+}
