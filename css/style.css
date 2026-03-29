@@ -142,7 +142,7 @@ a { color: var(--secondary); text-decoration: none; transition: all ease-in-out 
 .home-hero .hero-title {
     font-family: var(--serif);
     font-size: clamp(3rem, 9vw, 7rem);
-    font-weight: 700;
+    font-weight: bold;
     color: var(--light);
     line-height: 1.05;
     margin-bottom: 1rem;
@@ -207,7 +207,23 @@ section.products {
     overflow: hidden;
     transition: all .3s ease-in-out;
     cursor: pointer;
+    position: relative;
 }
+
+.product-tag {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 4px 10px;
+    z-index: 500;
+    font-size: .7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 10px;
+}
+
 .product-card:hover {
     transform: translateY(-7px);
     box-shadow: 0 20px 50px rgba(201,168,76,.12);
@@ -269,5 +285,35 @@ section.products {
 .product-foot .btn {
     flex: 1;
     text-align: center;
+}
+
+.about-us section.section {
+    background-color: var(--primary-dark);
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+}
+.about-us .reveal:first-child {
+    height:340px;
+    background: linear-gradient(145deg,#2d0a4e,#1a0530);
+    border-radius: 4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:8rem;
+    border:1px solid var(--primary);
+    overflow: hidden;
+}
+.about-us .section-title em {
+    color: var(--secondary);
+}
+
+.about-us p {
+    color: var(--light);
+    line-height: 1.9;
+    margin-bottom: 1rem;
+}
+
+.about-us span {
+    color: var(--secondary);
 }
 

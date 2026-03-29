@@ -2,26 +2,26 @@ const PRODUCTS = [
     { id: 1, name: "Marigold Female High Class Trouser", price: 48000, tag: "bestseller",
         isFeatured: true, category: "Trousers", image: "assets/images/products/classy-pants.jpg", description: "",
     },
-    { id: 2, name: "Soothing Cover-All Whine Hat", price: 48000, tag: "hats",
+    { id: 2, name: "Soothing Cover-All Whine Hat", price: 12000, tag: "hats",
         isFeatured: true, category: "Accessories", image: "assets/images/products/exquisite-hat.jpg", description: "",
     },
-    { id: 3, name: "Marigold Female High Class Trouser", price: 48000, tag: "bestseller",
-        isFeatured: false, category: "Trousers", image: "assets/images/products/classy-pants.jpg", description: "",
+    { id: 3, name: "Portal Female Bag", price: 20000, tag: "Accessories",
+        isFeatured: false, category: "Bags", image: "assets/images/products/female-bag.jpg", description: "",
     },
-    { id: 4, name: "Marigold Female High Class Trouser", price: 48000, tag: "bestseller",
-        isFeatured: false, category: "Trousers", image: "assets/images/products/classy-pants.jpg", description: "",
+    { id: 4, name: "Fluffy Unisex Hoodie", price: 33000, tag: "Hoodies",
+        isFeatured: false, category: "Shirts", image: "assets/images/products/fluffy-hoodie.jpg", description: "",
     },
-    { id: 5, name: "Marigold Female High Class Trouser", price: 48000, tag: "bestseller",
+    { id: 5, name: "Marigold Female High Class Trouser", price: 50000, tag: "bestseller",
         isFeatured: false, category: "Trousers", image: "assets/images/products/classy-pants.jpg", description: "",
     },
     { id: 6, name: "White Full Cover Gown for Women", price: 65000, tag: "bestseller",
         isFeatured: true, category: "Gowns", image: "assets/images/products/gown.jpg", description: "",
     },
-    { id: 7, name: "Marigold Female High Class Trouser", price: 48000, tag: "bestseller",
+    { id: 7, name: "Marigold Female High Class Trouser", price: 29000, tag: "bestseller",
         isFeatured: false, category: "Trousers", image: "assets/images/products/classy-pants.jpg", description: "",
     },
-    { id: 8, name: "Marigold Female High Class Trouser", price: 48000, tag: "bestseller",
-        isFeatured: false, category: "Trousers", image: "assets/images/products/classy-pants.jpg", description: "",
+    { id: 8, name: "2-in-1 Female Bag", price: 38000, tag: "Accessories",
+        isFeatured: false, category: "Bags", image: "assets/images/products/female-bag.jpg", description: "",
     },
 ];
 
@@ -43,7 +43,10 @@ const displayProducts = (
         imageCard.style.backgroundPosition = "center";
         imageCard.style.backgroundSize = "cover";
 
-        productsGrid.setAttribute('alt', product.name);
+        const productTag = document.createElement("div");
+        productTag.classList.add("product-tag");
+        productTag.textContent = product.tag;
+        imageCard.appendChild(productTag);
 
         const productBody = document.createElement("div");
         productBody.classList.add("product-body");
