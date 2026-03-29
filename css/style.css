@@ -334,3 +334,102 @@ section.products {
     margin-bottom:2rem;
     font-size:1.05rem;
 }
+
+/*Footer styles*/
+footer {
+    background: #060612;
+    border-top: 1px solid var(--secondary);
+    padding: 4.5rem 0 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-brand .nav-logo {
+    font-size: 1.9rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.footer-brand p {
+    color: var(--light);
+    font-size: .88rem;
+    line-height: 1.85;
+    max-width: 300px;
+    margin-bottom: 1.5rem;
+}
+
+
+.footer-col h4 {
+    font-family: var(--serif);
+    color: var(--light);
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+}
+
+.footer-col li {
+    margin-bottom: .55rem;
+}
+
+.footer-col a {
+    color: var(--secondary);
+    font-size: .88rem;
+    transition: all .3s ease-in-out;
+}
+
+.footer-col a:hover {
+    color: var(--secondary);
+    padding-left: 4px;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--secondary);
+    padding: 1.4rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-bottom p {
+    color: var(--light);
+    font-size: .82rem;
+}
+
+@media (max-width: 1024px) {
+    .footer-grid         { grid-template-columns: 1fr 1fr; }
+    .about-story         { grid-template-columns: 1fr; }
+    .about-story-visual  { height: 280px; order: -1; }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: var(--primary);
+        flex-direction: column;
+        padding: 1.5rem 2rem; gap: 1.2rem;
+        border-bottom: 1px solid var(--secondary);
+    }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: flex; align-items: center; }
+
+    .stats-grid   { grid-template-columns: repeat(2,1fr); }
+    .values-row   { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row     { grid-template-columns: 1fr; }
+    .time-slots   { grid-template-columns: repeat(3,1fr); }
+    .section      { padding: 3rem 0; }
+}
+
+@media (max-width: 480px) {
+    .hero-title { font-size: 2.6rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .time-slots { grid-template-columns: repeat(2,1fr); }
+}
