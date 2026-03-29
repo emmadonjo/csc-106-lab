@@ -2,39 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AURA MODE | Home</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Consistent Link Structure -->
-    <nav id="main-nav">
-        <a href="index.html" class="logo">AURA MODE</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="trustees.html">Board of Trustees</a>
-            <a href="appointments.html">Appointments</a>
-            <a href="events.html">Upcoming Events</a>
-        </div>
-    </nav> 
-    <!-- Luxury Hero Section -->
-    <header class="hero">
-        <h1>AURA<br>MODE</h1>
-    </header> 
-    <!-- Editorial Collection Grid -->
-    <section class="coll-grid">
-        <div class="coll-item"><img src="IMG-20260326-WA0003.jpg" alt="Editorial 1"></div>
-        <div class="coll-item"><img src="IMG-20260326-WA0004.jpg" alt="Editorial 2"></div>
-        <div class="coll-item"><img src="IMG-20260326-WA0005.jpg" alt="Editorial 3"></div>
-        <div class="coll-item"><img src="IMG-20260326-WA0008.jpg" alt="Editorial 6"></div>
+    <section id="mainNav">
+        <nav id="navbar">
+            <a href="index.html" class="logo">AURA MODE</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="trustees.html">Board of Trustees</a>
+                <a href="appointments.html">Appointments</a>
+                <a href="events.html">Upcoming Events</a>
+            </div>
+        </nav>
     </section>
 
-    <!-- Required Marquee (Appears on all pages) -->
-    <div class="marquee-wrap">
-        <div class="marquee-content">GLOBAL FASHION HOUSE — NEW PIECES ADDED WEEKLY — PARIS SHOWROOM NOW OPEN — </div>
-        <div>This is a change</div>
-    </div>
+    <section class="home-hero">
+        <div class="hero-content">
+            <span class="hero-eyebrow">New Collection 2026</span>
+            <h1 class="hero-title">
+                Define Your
+                <em>Elegance</em>
+            </h1>
+            <p class="hero-tagline">Luxury Nigerian fashion crafted for the bold, the visionary, the extraordinary.</p>
+            <div class="hero-cta">
+                <a href="products.html" class="btn btn-fill">Shop Collection</a>
+                <a href="about.html" class="btn">Our Story</a>
+            </div>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <section class="products">
+        <div class="section">
+            <div class="container">
+                <span class="section-label text-center" style="display:block">Curated Picks</span>
+                <h2 class="section-title text-center">Featured Pieces</h2>
+                <div class="divider"></div>
+
+                <div class="products-grid reveal">
+    <!--                <article class="product-card reveal" data-cat="gowns"-->
+    <!--                         onclick="openProduct('Royale Evening Gown','Gowns &amp; Dresses','₦185,000',-->
+    <!--            'A breathtaking floor-length evening gown crafted from imported silk chiffon. Hand-embroidered gold detailing along the neckline and hem. Perfect for galas and black-tie events.',-->
+    <!--            'linear-gradient(160deg,#2d0a4e,#7b1fa2)','👗')">-->
+                        <article class="product-card reveal" data-cat="gowns">
+                        <div class="product-thumb" style="background:linear-gradient(160deg,#2d0a4e,#7b1fa2)">
+                            👗<span class="product-badge">New</span>
+                        </div>
+                        <div class="product-body">
+                            <p class="product-cat">Gowns &amp; Dresses</p>
+                            <h3 class="product-name">Royale Evening Gown</h3>
+                            <p class="product-price">₦185,000</p>
+                        </div>
+                        <div class="product-foot">
+    <!--                        <button class="btn btn-sm" onclick="event.stopPropagation();openProduct('Royale Evening Gown','Gowns &amp; Dresses','₦185,000','A breathtaking floor-length evening gown crafted from imported silk chiffon. Hand-embroidered gold detailing along the neckline and hem.','linear-gradient(160deg,#2d0a4e,#7b1fa2)','👗')">View Details</button>-->
+                            <button class="wishlist-btn" title="Wishlist">♡</button>
+                        </div>
+                    </article>
+                </div>
+                <div style="text-align:center;margin-top:3rem">
+                    <a href="products.html" class="btn">View Full Collection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="src/index.js"></script>
 </body>
 </html>
