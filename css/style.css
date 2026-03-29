@@ -50,7 +50,9 @@
 }
 
 .divider-center {
-    margin: .75rem auto 2.5rem;
+    width: 50px; height: 3px;
+    background: var(--secondary);
+    margin: .75rem auto;
 }
 
 .btn {
@@ -81,6 +83,10 @@
 .btn-sm {
     padding: .55rem 1.3rem;
     font-size: .78rem;
+}
+
+.text-center {
+    text-align: center;
 }
 
 body {
@@ -494,6 +500,102 @@ footer {
 
 .breadcrumb a {
     color: var(--secondary);
+}
+
+/*Board of Trustees*/
+.trustees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.trustee-card {
+    background: var(--primary-dark); border: 1px solid var(--secondary);
+    border-radius: 15px; overflow: hidden;
+    text-align: center; transition: all ease-in-out 0.2s;
+}
+
+.trustee-card:hover {
+    border-color: var(--secondary);
+    transform: translateY(-7px);
+    box-shadow: 0 16px 40px rgba(201,168,76,.14);
+}
+
+.trustee-photo {
+    width: 100%;
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5.5rem;
+    transition: transform .55s ease;
+    background:linear-gradient(160deg,#2d0a4e,#7b1fa2);
+}
+
+.trustee-card:hover .trustee-photo {
+    transform: scale(1.06);
+}
+
+.trustee-info {
+    padding: 1.2rem;
+}
+
+.trustee-name {
+    font-family: var(--serif);
+    font-size: 1rem; color: var(--light);
+    margin-bottom: .25rem;
+}
+
+.trustee-role {
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: .7rem;
+}
+
+.values-row {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.value-card {
+    background: var(--primary-dark); border: 1px solid var(--primary);
+    padding: 1.5rem; border-radius: 15px; text-align: center;
+    transition: all ease-in-out 0.2s;
+}
+
+.value-card:hover {
+    border-color: var(--secondary);
+    transform: translateY(-4px);
+}
+
+.value-icon {
+    font-size: 2.2rem;
+    margin-bottom: .6rem;
+}
+
+.value-card h4 {
+    font-family: var(--serif);
+    color: var(--secondary);
+    margin-bottom: .4rem;
+    font-size: 1rem;
+}
+
+.value-card p {
+    font-size: .85rem;
+    color: var(--secondary);
+}
+
+#values  {
+    background-color: var(--secondary);
+}
+
+#values .container .section-label,
+#values .container .section-title {
+    color: var(--primary-dark);
 }
 
 @media (max-width: 1024px) {

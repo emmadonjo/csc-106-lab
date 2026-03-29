@@ -37,11 +37,22 @@ const PRODUCTS = [
     },
 ];
 
+const TRUSTEES = [
+    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
+    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
+    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
+    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
+    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
+];
+
 const displayProducts = (
     containerClass,
     products,
 ) => {
     const productsGrid = document.querySelector(containerClass);
+    if (!productsGrid) {
+        return;
+    }
 
     for (let product of products) {
         const productCard = document.createElement("article");
@@ -80,9 +91,7 @@ const displayProducts = (
         productCard.appendChild(productBody);
         productCard.appendChild(productFooter);
 
-        if (productsGrid) {
-            productsGrid.appendChild(productCard);
-        }
+        productsGrid.appendChild(productCard);
     }
 }
 
@@ -95,12 +104,44 @@ const displayMarqueeItems = () => {
     ];
 
     const marqueeBarElement = document.querySelector(".marquee-bar marquee");
+    if (!marqueeBarElement) {
+        return;
+    }
+
     const formattedItems = items.map((item) => {
         return `<span class="sep">|</span> ${item}`;
     });
 
-    if (marqueeBarElement) {
-        marqueeBarElement.innerHTML = formattedItems.join(" ");
+    marqueeBarElement.innerHTML = formattedItems.join(" ");
+}
+
+const displayTrustees = () => {
+    const trusteeGrid = document.querySelector(".trustees-grid");
+    if (!trusteeGrid) {
+        return;
+    }
+
+    for (let trustee of TRUSTEES) {
+        const trusteeCard = document.createElement("div");
+        trusteeCard.classList.add("trustee-card", "reveal");
+
+        const trusteePhotoWrapper = document.createElement("div");
+        trusteePhotoWrapper.classList.add("trustee-photo");
+        trusteePhotoWrapper.style.backgroundImage = `url(${trustee.image})`;
+        trusteePhotoWrapper.style.backgroundPosition = "center";
+        trusteePhotoWrapper.style.backgroundSize = "cover";
+
+
+        const trusteeInfo = document.createElement("div");
+        trusteeInfo.classList.add("trustee-info");
+        trusteeInfo.innerHTML = `
+            <h3 class="trustee-name">${trustee.name}</h3>
+            <p class="trustee-role">${trustee.role}</p>
+        `;
+        trusteeCard.appendChild(trusteePhotoWrapper);
+        trusteeCard.appendChild(trusteeInfo);
+
+        trusteeGrid.appendChild(trusteeCard);
     }
 }
 
@@ -112,3 +153,5 @@ displayProducts(
     '.product-list',
     PRODUCTS
 );
+
+displayTrustees();
