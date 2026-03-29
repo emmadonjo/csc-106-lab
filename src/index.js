@@ -74,5 +74,24 @@ const displayProducts = (
     }
 }
 
+const displayMarqueeItems = () => {
+    const items = [
+        "Buy 1 get 2 ongoing",
+        "Free shipping on orders above ₦50,000",
+        "Pre-order to enjoy amazing discounts",
+        "Become a Fashion Star with our Design Workshop",
+    ];
+
+    const marqueeBarElement = document.querySelector(".marquee-bar marquee");
+    const formattedItems = items.map((item) => {
+        return `<span class="sep">|</span> ${item}`;
+    });
+
+    if (marqueeBarElement) {
+        marqueeBarElement.innerHTML = formattedItems.join(" ");
+    }
+}
+
+displayMarqueeItems();
 const featuredProducts = PRODUCTS.filter(product => product.isFeatured);
 displayProducts('.products-grid', featuredProducts);
