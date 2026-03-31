@@ -144,12 +144,28 @@ a {
 
 .nav-links a{
     text-decoration: none;
-    color: var(--secondary);
+    color: var(--light);
 }
+
 .nav-links a:hover{
     opacity: 0.7;
     animation: all ease 2s;
 }
+
+.nav-toggle {
+    display: none;
+    color: var(--secondary);
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+}
+
+.nav-toggle:hover {
+    cursor: pointer;
+    opacity: .6;
+    transition: all .3s ease-in-out;
+}
+
 
 .home-hero {
     min-height: 100vh;
@@ -799,22 +815,57 @@ select.form-control option {
 
 @media (max-width: 768px) {
     .nav-links {
-        display: none; position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: var(--primary);
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--primary-dark);
         flex-direction: column;
-        padding: 1.5rem 2rem; gap: 1.2rem;
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+        border-left: 1px solid var(--secondary);
         border-bottom: 1px solid var(--secondary);
+        z-index: 2000;
+        width: 240px;
+        align-items: flex-start;
     }
-    .nav-links.open { display: flex; }
-    .nav-toggle { display: flex; align-items: center; }
 
-    .stats-grid   { grid-template-columns: repeat(2,1fr); }
-    .values-row   { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .form-row     { grid-template-columns: 1fr; }
-    .time-slots   { grid-template-columns: repeat(3,1fr); }
-    .section      { padding: 3rem 0; }
+    .nav-links a{
+        font-size: 1.3rem;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: flex;
+        align-items: center;
+    }
+
+    .stats-grid   {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .values-row {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .time-slots  {
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .section {
+        padding: 3rem 0;
+    }
 }
 
 @media (max-width: 480px) {

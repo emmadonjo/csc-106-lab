@@ -287,3 +287,27 @@ if (contactForm) {
         });
     })
 }
+
+const toggleMobileMenu = () => {
+    if (window.innerWidth >= 768) {
+        return;
+    }
+
+    const mobileMenu = document.querySelector('.nav-links');
+
+    if (mobileMenu.style.display === "flex") {
+        mobileMenu.style.display = "none";
+    }else {
+        mobileMenu.style.display = "flex";
+    }
+}
+
+const menuToggleButton = document.querySelector('.nav-toggle');
+
+menuToggleButton.addEventListener('click', () => {
+    toggleMobileMenu();
+});
+
+window.addEventListener('resize', () => {
+    document.querySelector('.nav-links').style.display = "none";
+});
