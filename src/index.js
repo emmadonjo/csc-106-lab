@@ -155,3 +155,135 @@ displayProducts(
 );
 
 displayTrustees();
+
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const firstNameField = document.getElementById("firstName");
+        const lastNameField = document.getElementById("lastName");
+        const emailField = document.getElementById("email");
+        const phoneField = document.getElementById("phone");
+        const subjectField = document.getElementById("subject");
+        const dateTimeField = document.getElementById("dateTime");
+        const messageField = document.getElementById("message");
+
+        // values
+        const firstName = firstNameField.value;
+        const lastName = lastNameField.value;
+        const email = emailField.value;
+        const phone = phoneField.value;
+        const subject = subjectField.value;
+        const dateTime = dateTimeField.value;
+        const message = messageField.value;
+
+        const infoElement = document.getElementById("info");
+        infoElement.textContent = "";
+
+        const validateForm = () => {
+            const errorFields = document.querySelectorAll('.field-error');
+
+            for (let i = 0; i < errorFields.length; i++) {
+                errorFields[i].innerHTML = '';
+            }
+
+            const errors = {};
+            if (!firstName || firstName.trim().length === 0) {
+                errors["firstName"] = "First name is required";
+            } else if (firstName.trim().length < 3) {
+                errors["firstName"] = "First name must be at least 3 characters.";
+            } else if (firstName.trim().length > 124) {
+                errors['firstName'] = "First name must not exceed 124 characters.";
+            }
+
+            if (!lastName || lastName.trim().length === 0) {
+                errors["lastName"] = "Last name is required";
+            } else if (lastName.trim().length < 3) {
+                errors["lastName"] = "Last name must be at least 3 characters.";
+            } else if (lastName.trim().length > 124) {
+                errors['lastName'] = "Last name must not exceed 124 characters.";
+            }
+
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!email || email.trim().length === 0) {
+                errors["email"] = "Email is required";
+            } else if (email.trim().length > 255) {
+                errors["email"] = "Email must not exceed 255 characters.";
+            } else if (!emailPattern.test(email.trim())) {
+                errors["email"] = "The provided email is invalid.";
+            }
+
+            const mobilePhoneNumberPattern = /^(?:\+234|0)(7|2|5|8|9)(0|1)\d{8}$/;
+
+            if (!phone || phone.trim().length === 0) {
+                errors["phone"] = "Phone number is required";
+            } else if (!mobilePhoneNumberPattern.test(phone.trim())) {
+                errors["phone"] = "The provided phone number is invalid.";
+            }
+
+            const allowedSubjects = [
+                "inquiry",
+                "bespoke",
+                "appointment",
+                "bridal",
+                "wholesale",
+                "press",
+                "other",
+            ];
+
+            if (!subject || subject.trim().length === 0) {
+                errors["subject"] = "Subject is required";
+            } else if (!allowedSubjects.includes(subject.trim())) {
+                errors["subject"] = "The selected subject is invalid.";
+            }
+
+            if (subject.trim() === 'appointment') {
+                if (dateTime || dateTime.trim().length === 0) {
+                    errors['dateTime'] = "The date/time field is required.";
+                } else {
+                    const parsedDate =  new Date(dateTime);
+                    if (isNaN(parsedDate)) {
+                        errors["dateTime"] = "The date format is invalid.";
+                    } else if (new Date() >= parsedDate) {
+                        errors["dateTime"] = "Kindly provided a future date/time.";
+                    }
+                }
+            }
+
+
+            if (!message || message.trim().length === 0) {
+                errors["message"] = "Message is required";
+            } else if (message.trim().length > 500) {
+                errors["message"] = "Message must not exceed 500 characters.";
+            }
+
+            if (Object.values(errors).length > 0) {
+                for(error in errors) {
+                    const errorId = `${error}Err`;
+                    let errorElement = document.getElementById(errorId);
+
+                    errorElement.innerHTML = errors[error];
+                    errorElement.classList.add("show");
+                }
+                return false;
+            }
+
+            return true;
+        }
+
+        if (!validateForm()) {
+            return;
+        }
+
+        infoElement.style.color = "green";
+        infoElement.style.padding = "10px";
+        infoElement.textContent = `Thanks ${firstName}, your appointment has been scheduled successfully.`;
+
+        contactForm.reset();
+        window.scrollTo({
+            top: 400,
+            behavior: "smooth",
+        });
+    })
+}
