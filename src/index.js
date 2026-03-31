@@ -272,7 +272,7 @@ if (contactForm) {
             }
 
             if (subject.trim() === 'appointment') {
-                if (dateTime || dateTime.trim().length === 0) {
+                if (!dateTime || dateTime.trim().length === 0) {
                     errors['dateTime'] = "The date/time field is required.";
                 } else {
                     const parsedDate =  new Date(dateTime);
