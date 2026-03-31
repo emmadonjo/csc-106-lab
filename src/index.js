@@ -45,6 +45,26 @@ const TRUSTEES = [
     {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
 ];
 
+const displayProductDetails = (product) => {
+    const modal = document.querySelector(".modal-overlay");
+    modal.classList.add("open");
+
+    const closeModalButton = document.querySelector(".modal-close");
+    closeModalButton.addEventListener("click", function() {
+        modal.classList.remove("open");
+    });
+
+    const imageWrapper = document.querySelector("#modalImg");
+    imageWrapper.style.backgroundImage = `url(${product.image})`;
+    imageWrapper.style.backgroundPosition = "center center";
+    imageWrapper.style.backgroundSize = "cover";
+
+    document.querySelector('#modalCat').textContent = product.category;
+    document.querySelector('#modalName').textContent = product.name;
+    document.querySelector('#modalPrice').textContent = product.price.toFixed(2);
+    document.querySelector('#modalDesc').textContent = product.description;
+}
+
 const displayProducts = (
     containerClass,
     products,
@@ -84,8 +104,21 @@ const displayProducts = (
 
         const detailsButton = document.createElement("button");
         detailsButton.classList.add("btn", "btn-sm");
-        detailsButton.textContent = 'View Details'
+        detailsButton.textContent = 'View Details';
+        detailsButton.dataset.id = product.id;
+
+        detailsButton.addEventListener("click", (e) => {
+            const productId = e.target.dataset.id;
+            const productDetails = PRODUCTS.find((product) => product.id == productId);
+
+            if (!productDetails) {
+                return;
+            }
+            displayProductDetails(productDetails);
+        })
+
         productFooter.appendChild(detailsButton);
+
 
         productCard.append(imageCard);
         productCard.appendChild(productBody);
