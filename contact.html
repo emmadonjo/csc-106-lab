@@ -7,70 +7,184 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<section id="mainNav">
-    <nav id="navbar">
-        <a href="index.html" class="logo">AURA MODE</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="events.html">Events</a>
-            <a href="about.html">About Us</a>
-            <a href="contact.html">Contact</a>
-        </div>
-    </nav>
-    <div class="marquee-bar">
-        <marquee scrollamount="5" behavior="scroll" direction="left"></marquee>
-    </div>
-</section>
-
-<div class="page-hero">
-    <div class="page-hero-bg"></div>
-    <div class="page-hero-content">
-        <h1>Get In Touch</h1>
-        <p>Inquiries, appointments &amp; bookings</p>
-        <div class="breadcrumb">
-            <a href="index.html">Home</a>
-            <span>/</span>
-            <span>Contact</span>
-        </div>
-    </div>
-</div>
-
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <a href="index.html" class="nav-logo">AURA MODE</a>
-                <p>Redefining Nigerian luxury fashion since 2020. Each piece tells a story of heritage, craftsmanship, and bold artistry.</p>
+    <section id="mainNav">
+        <nav id="navbar">
+            <a href="index.html" class="logo">AURA MODE</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="events.html">Events</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
             </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="about.html">Products</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+        </nav>
+        <div class="marquee-bar">
+            <marquee scrollamount="5" behavior="scroll" direction="left"></marquee>
+        </div>
+    </section>
 
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <ul>
-                    <li><a href="#">376 Herbert Macaulay Way, Yaba, Lagos.</a></li>
-                    <li><a href="tel:+2348137974778">+234 813 797 4778</a></li>
-                    <li><a href="mailto:hello@elara.ng">hello@auramode.ng</a></li>
-                    <li><a href="#">Mon – Sat: 9am – 6pm</a></li>
-                </ul>
+    <div class="page-hero">
+        <div class="page-hero-bg"></div>
+        <div class="page-hero-content">
+            <h1>Get In Touch</h1>
+            <p>Inquiries, appointments &amp; bookings</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Contact</span>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 AURA Mode Fashion House. All rights reserved.</p>
-            <p>Designed for CSC 106 / IFT 203 — MIVA Open University</p>
-        </div>
     </div>
-</footer>
 
-<script src="src/index.js"></script>
+    <section class="section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="reveal">
+                    <h3 class="contact-info-title">Contact Information</h3>
+                    <div class="contact-detail">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>Atelier Address</strong>
+                            <span>12 Elegance Boulevard, Victoria Island, Lagos, Nigeria</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>Phone</strong>
+                            <span>+234 801 234 5678</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <strong>Email</strong>
+                            <span>hello@elara.ng</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-icon">🕐</div>
+                        <div>
+                            <strong>Opening Hours</strong>
+                            <span>Monday – Saturday: 9:00 AM – 6:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <h3>Send an Inquiry</h3>
+                    <p>Fill in the form below for inquiries, bespoke orders, or appointment bookings. We respond within 24 hours.</p>
+
+                    <p id="info" role="alert"></p>
+                    <form id="contactForm" novalidate>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="firstName">First Name <span class="requiredField">*</span></label>
+                                <input type="text" id="firstName" class="form-control" placeholder="John" name="firstName" />
+                                <p class="field-error" id="firstNameErr"></p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="lastName">Last Name <span class="requiredField">*</span></label>
+                                <input type="text" id="lastName" class="form-control" placeholder="Doe" name="lastName" />
+                                <p class="field-error" id="lastNameErr"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email Address <span class="requiredField">*</span></label>
+                                <input type="email" id="email" class="form-control" placeholder="your@email.com" name="email" />
+                                <p class="field-error" id="emailErr"></p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" placeholder="+2348012345678" name="phone" />
+                                <p class="field-error" id="phoneErr"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Subject <span class="requiredField">*</span></label>
+                            <select id="subject" class="form-control" name="subject">
+                                <option value="">— Select a subject —</option>
+                                <option value="inquiry">General Inquiry</option>
+                                <option value="bespoke">Bespoke / Custom Order</option>
+                                <option value="appointment">Styling Appointment</option>
+                                <option value="bridal">Bridal Consultation</option>
+                                <option value="wholesale">Wholesale / Retail</option>
+                                <option value="press">Press &amp; Media</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <p class="field-error" id="subjectErr"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Preferred Appointment Date</label>
+                            <input type="datetime-local" id="dateTime" class="form-control" name="dateTime" />
+                            <p class="field-error" id="dateTimeErr"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="message">Message <span class="requiredField">*</span></label>
+                            <textarea id="message" class="form-control" maxlength="500" placeholder="Tell us what you need — style preferences, occasion details, measurements, etc." name="message"></textarea>
+                            <p class="char-count" id="charCount">0/500</p>
+                            <p class="field-error" id="messageErr"></p>
+                        </div>
+
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-fill">Send Message &nbsp;</button>
+                        </div>
+
+                        <div class="success-msg" id="successMsg">
+                            ✓ &nbsp; Thank you! Your message has been sent. We'll get back to you within 24 hours.
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">AURA MODE</a>
+                    <p>Redefining Nigerian luxury fashion since 2020. Each piece tells a story of heritage, craftsmanship, and bold artistry.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="about.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">376 Herbert Macaulay Way, Yaba, Lagos.</a></li>
+                        <li><a href="tel:+2348137974778">+234 813 797 4778</a></li>
+                        <li><a href="mailto:hello@elara.ng">hello@auramode.ng</a></li>
+                        <li><a href="#">Mon – Sat: 9am – 6pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AURA Mode Fashion House. All rights reserved.</p>
+                <p>Designed for CSC 106 / IFT 203 — MIVA Open University</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/index.js"></script>
 </body>
 </html>
