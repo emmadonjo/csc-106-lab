@@ -38,11 +38,11 @@ const PRODUCTS = [
 ];
 
 const TRUSTEES = [
-    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
-    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
-    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
-    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
-    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua-emmanuel.jpg", role: "Chief Technology Officer"},
+    {name: "TrustGod Oguchiugbo", image: "assets/images/trustees/trustGod.jpeg", role: "Chief Executive Officer"},
+    {name: "Joshua Emmanuel", image: "assets/images/trustees/joshua.jpeg", role: "Chief Technology Officer"},
+    {name: "Alexander Bello Olajide", image: "assets/images/trustees/alex.jpeg", role: "Chief Security Officer"},
+    {name: "Testimony Faleye", image: "assets/images/trustees/testimony.jpeg", role: "Sales Director"},
+    {name: "Babatunde Ibrahim Alawiye", image: "assets/images/trustees/babatunde.jpeg", role: "Chief Compliance Officer"},
 ];
 
 const displayProductDetails = (product) => {
