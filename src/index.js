@@ -43,6 +43,7 @@ const TRUSTEES = [
     {name: "Alexander Bello Olajide", image: "assets/images/trustees/alex.jpeg", role: "Chief Security Officer"},
     {name: "Testimony Faleye", image: "assets/images/trustees/testimony.jpeg", role: "Sales Director"},
     {name: "Babatunde Ibrahim Alawiye", image: "assets/images/trustees/babatunde.jpeg", role: "Chief Compliance Officer"},
+    {name: "Possible Itoro", image: "assets/images/trustees/itoro.jpeg", role: "Chief Accountant"},
 ];
 
 const displayProductDetails = (product) => {
